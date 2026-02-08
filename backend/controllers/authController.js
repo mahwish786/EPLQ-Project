@@ -70,8 +70,10 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   res.cookie('user_token', 'none', {
-    expires: new Date(Date.now() + 10 * 1000),
-    httpOnly: true
+    httpOnly: true,
+    expires: new Date(0),
+    secure: true,
+    sameSite: 'none'
   });
   res.status(200).json({ success: true });
 };

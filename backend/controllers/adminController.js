@@ -65,8 +65,10 @@ export const loginAdmin = async (req, res) => {
 
 export const logoutAdmin = async (req, res) => {
   res.cookie('admin_token', 'none', {
-    expires: new Date(Date.now() + 10 * 1000),
-    httpOnly: true
+    httpOnly: true,
+    expires: new Date(0),
+    secure: true,
+    sameSite: 'none'
   });
   res.status(200).json({ success: true });
 };
