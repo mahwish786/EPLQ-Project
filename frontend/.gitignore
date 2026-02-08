@@ -1,0 +1,68 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Next.js build output
+/.next/
+/out/
+
+# Production / Build
+/build
+/dist
+
+# Environment Variables
+.env
+.env.*
+
+# Allow the example file
+!.env.example
+!.env.template
+
+# Debug Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Testing & Coverage
+/coverage
+*.lcov
+.nyc_output
+.cypress/
+playwright-report/
+test-results/
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.code-workspace
+
+# JetBrains / WebStorm
+.idea/
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
