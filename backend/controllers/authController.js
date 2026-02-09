@@ -5,19 +5,15 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const sendUserToken = (user, statusCode, res) => {
-  if (!process.env.JWT_SECRET) {
-    throw new Error("FATAL ERROR: JWT_SECRET is missing in .env file");
-  }
-
   const token = jwt.sign({ id: user._id, role: 'user' }, process.env.JWT_SECRET, {
     expiresIn: '30d'
   });
 
   const options = {
-    expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+    maxAge: 30 * 24 * 60 * 60 * 1000,
   };
 
   res.status(statusCode).cookie('user_token', token, options).json({
@@ -71,16 +67,20 @@ export const login = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-  res.cookie('user_token', 'none', {
+  try {
+    res.clearCookie('user_token', {
     httpOnly: true,
-    expires: new Date(0),
     secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-  });
-  res.status(200).json({ success: true });
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+    });
+    res.status(200).json({ success: true });
+  } 
+  catch (error) {
+    console.log(error.message);
+    return res.status(500).json({success: false});
+  }
 };
 
 export const checkUserAuth = async (req, res) => {
-  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-  res.status(200).json({ success: true, role: 'user', user: req.user });
+  res.status(200).json({ success: true });
 };

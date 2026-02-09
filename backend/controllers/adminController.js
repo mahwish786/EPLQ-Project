@@ -10,10 +10,10 @@ const sendAdminToken = (admin, statusCode, res) => {
   });
 
   const options = {
-    expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+    maxAge: 30 * 24 * 60 * 60 * 1000,
   };
 
   res.status(statusCode).cookie('admin_token', token, options).json({
@@ -66,13 +66,18 @@ export const loginAdmin = async (req, res) => {
 };
 
 export const logoutAdmin = async (req, res) => {
-  res.cookie('admin_token', 'none', {
+  try {
+    res.clearCookie('admin_token', {
     httpOnly: true,
-    expires: new Date(0),
     secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-  });
-  res.status(200).json({ success: true });
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+    });
+    res.status(200).json({ success: true });
+  }
+  catch (error) {
+    console.log(error.message);
+    return res.status(500).json({success: false});
+  }
 };
 
 export const checkAdminAuth = async (req, res) => {
