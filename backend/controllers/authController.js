@@ -16,8 +16,11 @@ const sendUserToken = (user, statusCode, res) => {
   const options = {
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    secure: true, // Hardcoded for production
+    sameSite: 'none', // Hardcoded for production
+    // secure: process.env.NODE_ENV === 'production', 
+    // sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    path: '/',
   };
 
   res.status(statusCode).cookie('user_token', token, options).json({
@@ -71,10 +74,14 @@ export const login = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-  res.clearCookie('user_token', {
+  res.cookie('user_token', '', {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    expires: new Date(0),
+    secure: true,
+    sameSite: 'none',
+    path: '/'
+    // secure: process.env.NODE_ENV === 'production',
+    // sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
   });
   res.status(200).json({ success: true });
 };

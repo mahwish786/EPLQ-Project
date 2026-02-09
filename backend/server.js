@@ -8,8 +8,9 @@ import adminRoutes from './routes/adminRoute.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();
-
 await connectDB();
+
+app.set('trust proxy', 1);
 
 app.use(cors({
   origin: [
