@@ -1,13 +1,12 @@
 import express from 'express';
 const app = express();
+import 'dotenv/config';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 import placeRoutes from './routes/placeRoute.js';
 import authRoutes from './routes/authRoute.js';
 import adminRoutes from './routes/adminRoute.js';
 import cors from 'cors';
-import dotenv from 'dotenv';
-dotenv.config();
 await connectDB();
 
 app.use(cors({

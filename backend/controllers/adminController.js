@@ -1,8 +1,6 @@
 import Admin from '../models/Admin.js';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const sendAdminToken = (admin, statusCode, res) => {
   const token = jwt.sign({ id: admin._id, role: 'admin' }, process.env.JWT_SECRET, {

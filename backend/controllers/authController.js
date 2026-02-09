@@ -1,8 +1,6 @@
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs'; 
-import dotenv from 'dotenv';
-dotenv.config();
 
 const sendUserToken = (user, statusCode, res) => {
   const token = jwt.sign({ id: user._id, role: 'user' }, process.env.JWT_SECRET, {
