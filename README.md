@@ -1,81 +1,87 @@
-# 🛡️ EPLQ Secure – Privacy-Preserving Location Network
+# EPLQ Secure – Privacy‑Preserving Location Network
 
-![Project Status](https://img.shields.io/badge/Status-Operational-green?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
-![Privacy](https://img.shields.io/badge/Privacy-Zero%20Knowledge-purple?style=for-the-badge)
+EPLQ Secure is a full‑stack web application built during an internship to explore how location‑based services can work **without continuously tracking users**. The system allows people to search for nearby essential places such as hospitals, ATMs, and safety zones, while keeping user privacy as the primary design goal.
 
-**Find Locations. Without Being Found.**
-
-EPLQ Secure is a full-stack web application designed to help users locate critical infrastructure—such as hospitals, ATMs, police stations, and safe zones—while prioritizing user privacy. Unlike traditional map services, EPLQ Secure avoids persistent real-time location tracking and follows a privacy-preserving architecture.
+This project focuses on *how* data flows through the system rather than collecting more data than necessary.
 
 ---
 
-## 📑 Table of Contents
-- Screenshots
-- Key Features
+## Table of Contents
+- Overview
+- Features
 - Tech Stack
-- Getting Started
-- Project Structure
-- API Documentation
+- How the System Works
+- Local Setup
 - Environment Variables
-- Contributing
-- License
+- Project Structure
+- API Overview
+- Usage & Access
+- License & Ownership
 
 ---
 
-## 📸 Screenshots
+## Overview
 
-| User Dashboard | Admin Control Panel |
-|:--:|:--:|
-| User Search Interface | Admin Management |
-| Secure browsing | Secure database management |
+Most location services rely on constant access to real‑time user coordinates. EPLQ Secure takes a different approach. Searches are performed without persistent location storage, and navigation is only handed off to third‑party map providers when the user explicitly chooses to do so.
 
----
-
-## ✨ Key Features
-
-### 🔒 User Features
-- Zero-tracking search
-- Encrypted requests
-- One-click navigation (Google Maps redirect)
-- Rich location data (images, address, safety info)
-
-### 🛡️ Admin Features
-- Secure admin dashboard
-- Add / Edit / Delete locations
-- Interactive Leaflet map picker
-- Image uploads via Cloudinary
+The project was created as part of an internship and is **not intended to be a public, open‑source platform**.
 
 ---
 
-## 🛠️ Tech Stack
+## Features
+
+### User Side
+- Search for hospitals, ATMs, police stations, and safe zones
+- No continuous background location tracking
+- Clean, animated UI built with Next.js and Tailwind
+- Optional navigation using external map services
+
+### Admin Side
+- Secure admin authentication
+- Add, edit, or remove locations
+- Upload images using Cloudinary
+- Select coordinates using an interactive map
+
+---
+
+## Tech Stack
 
 ### Frontend
 - Next.js (App Router)
+- React 19
 - Tailwind CSS
 - Framer Motion
-- Leaflet.js
+- Leaflet & React‑Leaflet
+- Axios
 
 ### Backend
 - Node.js
-- Express.js
-- MongoDB (Mongoose)
-- JWT Authentication
-- Cloudinary
+- Express
+- MongoDB with Mongoose
+- JWT authentication
+- Cloudinary (media storage)
+- Multer (file handling)
 
 ---
 
-## 🚀 Getting Started
+## How the System Works
+
+1. Users access the frontend and perform a location search.
+2. Requests are sent to the backend API without storing continuous location data.
+3. The backend fetches relevant places from the database.
+4. If navigation is required, users are redirected to an external map provider.
+5. Admins manage all location data through a protected dashboard.
+
+---
+
+## Local Setup
 
 ### Prerequisites
 - Node.js v18+
-- MongoDB (Local or Atlas)
+- MongoDB (local or Atlas)
 - Cloudinary account
 
----
-
-### Installation
-
+### Clone the Repository
 ```bash
 git clone https://github.com/mahwish786/EPLQ-Project.git
 cd eplq-secure
@@ -83,7 +89,7 @@ cd eplq-secure
 
 ---
 
-### Backend Setup
+## Backend Setup
 
 ```bash
 cd backend
@@ -91,11 +97,14 @@ npm install
 npm run server
 ```
 
-Backend runs on: `http://localhost:5000`
+Backend runs on:
+```
+http://localhost:5000
+```
 
 ---
 
-### Frontend Setup
+## Frontend Setup
 
 ```bash
 cd frontend
@@ -103,14 +112,16 @@ npm install
 npm run dev
 ```
 
-Frontend runs on: `http://localhost:3000`
+Frontend runs on:
+```
+http://localhost:3000
+```
 
 ---
 
-## 🔐 Environment Variables
+## Environment Variables
 
-### Backend (.env)
-
+### Backend (`.env`)
 ```env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
@@ -120,62 +131,60 @@ CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 ```
 
-### Frontend (.env.local)
-
+### Frontend (`.env.local`)
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000/api
 ```
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
-```bash
+```
 eplq-secure/
 ├── backend/
-│   ├── config/          # DB & Cloudinary config
-│   ├── controllers/     # Auth, Places, Admin logic
-│   ├── models/          # Mongoose schemas
+│   ├── config/          # Database & Cloudinary config
+│   ├── controllers/     # Business logic
+│   ├── models/          # Database schemas
 │   ├── routes/          # API routes
-│   └── server.js        # Entry point
+│   └── server.js        # Server entry point
 │
 └── frontend/
-    ├── src/app/         # Pages & routing
+    ├── src/app/         # Pages and routing
     ├── src/components/  # UI components
-    └── src/services/    # Axios API config
+    └── src/services/    # API helpers
 ```
 
 ---
 
-## 🔗 API Documentation
+## API Overview
 
-| Method | Endpoint | Description | Access |
-|------|--------|------------|--------|
-| GET | /api/places | Get all locations | Public |
-| POST | /api/places | Add new location | Admin |
-| PUT | /api/places/:id | Update location | Admin |
-| DELETE | /api/places/:id | Delete location | Admin |
-| POST | /api/auth/register | Register user | Public |
-| POST | /api/admin/login | Admin login | Public |
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome!
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to GitHub
-5. Open a Pull Request
+| Method | Endpoint | Description |
+|------|---------|------------|
+| GET | /api/places | Fetch all locations |
+| POST | /api/places | Add new location (admin) |
+| PUT | /api/places/:id | Update location (admin) |
+| DELETE | /api/places/:id | Delete location (admin) |
+| POST | /api/auth/register | User registration |
+| POST | /api/admin/login | Admin authentication |
 
 ---
 
-## 📜 License
+## Usage & Access
 
-Distributed under the **MIT License**.
+This repository was created as part of an internship project. Access to modify or deploy the system is restricted to authorized individuals approved by the owning organization.
+
+The code is shared for evaluation and demonstration purposes only.
 
 ---
 
-<p align="center">Built by <strong>Mahwish Ahmed</strong></p>
+## License & Ownership
+
+This project is **proprietary**.
+
+All rights are reserved by the owning organization.  
+Unauthorized copying, modification, or redistribution of this code is not permitted.
+
+---
+
+Built by **Mahwish Ahmed** during internship work.
