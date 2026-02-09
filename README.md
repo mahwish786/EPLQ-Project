@@ -1,4 +1,4 @@
-# 🛡️ EPLQ Secure - Privacy-Preserving Location Network
+# 🛡️ EPLQ Secure – Privacy-Preserving Location Network
 
 ![Project Status](https://img.shields.io/badge/Status-Operational-green?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
@@ -6,92 +6,176 @@
 
 **Find Locations. Without Being Found.**
 
-EPLQ Secure is a full-stack web application designed to help users locate critical infrastructure—such as hospitals, ATMs, police stations, and safe zones—while prioritizing user privacy. Unlike traditional map services that track your every move, EPLQ uses a secure architectural pattern to deliver location data without compromising your realtime coordinates.
+EPLQ Secure is a full-stack web application designed to help users locate critical infrastructure—such as hospitals, ATMs, police stations, and safe zones—while prioritizing user privacy. Unlike traditional map services, EPLQ Secure avoids persistent real-time location tracking and follows a privacy-preserving architecture.
+
+---
+
+## 📑 Table of Contents
+- Screenshots
+- Key Features
+- Tech Stack
+- Getting Started
+- Project Structure
+- API Documentation
+- Environment Variables
+- Contributing
+- License
 
 ---
 
 ## 📸 Screenshots
 
-| **User Dashboard** | **Admin Control Panel** |
-|:---:|:---:|
-| ![User Dashboard](https://via.placeholder.com/600x300?text=User+Search+Interface) | ![Admin Dashboard](https://via.placeholder.com/600x300?text=Admin+Management) |
-| *Securely browse & navigate to locations* | *Manage the secure location database* |
+| User Dashboard | Admin Control Panel |
+|:--:|:--:|
+| User Search Interface | Admin Management |
+| Secure browsing | Secure database management |
 
 ---
 
 ## ✨ Key Features
 
-### 🔒 For Users (Privacy First)
-* **Zero-Tracking Search:** Search for amenities by name, city, or category without persistent location logging.
-* **Encrypted Data Transfer:** Location queries are obfuscated before transmission.
-* **One-Click Navigation:** Seamless integration with Google Maps for routing when you actually need it.
-* **Rich Details:** View high-quality images, full addresses, and safety descriptions.
+### 🔒 User Features
+- Zero-tracking search
+- Encrypted requests
+- One-click navigation (Google Maps redirect)
+- Rich location data (images, address, safety info)
 
-### 🛡️ For Admins (Control Panel)
-* **Secure Dashboard:** Real-time overview of the network status and database metrics.
-* **Location Management:** Add, Edit, and Delete secure points in the network.
-* **Interactive Map Picker:** Precisely set coordinates using an integrated Leaflet map.
-* **Media Management:** Seamless image uploads powered by Cloudinary.
+### 🛡️ Admin Features
+- Secure admin dashboard
+- Add / Edit / Delete locations
+- Interactive Leaflet map picker
+- Image uploads via Cloudinary
 
 ---
 
 ## 🛠️ Tech Stack
 
-### **Frontend (Next.js)**
-* ![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=nextdotjs&logoColor=white) **App Router** architecture for SEO and performance.
-* ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white) Modern, responsive styling.
-* ![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=flat&logo=framer&logoColor=white) Smooth animations and transitions.
-* ![Leaflet](https://img.shields.io/badge/Leaflet-199900?style=flat&logo=leaflet&logoColor=white) Interactive maps.
+### Frontend
+- Next.js (App Router)
+- Tailwind CSS
+- Framer Motion
+- Leaflet.js
 
-### **Backend (Node.js)**
-* ![Express.js](https://img.shields.io/badge/Express.js-000000?style=flat&logo=express&logoColor=white) RESTful API architecture.
-* ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=flat&logo=mongodb&logoColor=white) NoSQL database for flexible data storage.
-* ![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=flat&logo=cloudinary&logoColor=white) Cloud storage for location images.
-* ![JWT](https://img.shields.io/badge/JWT-000000?style=flat&logo=jsonwebtokens&logoColor=white) Secure, stateless authentication.
+### Backend
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
+- JWT Authentication
+- Cloudinary
 
 ---
 
 ## 🚀 Getting Started
 
-Follow these instructions to set up the project locally.
-
 ### Prerequisites
-* Node.js (v18 or higher)
-* MongoDB (Local or Atlas)
-* Cloudinary Account (for images)
+- Node.js v18+
+- MongoDB (Local or Atlas)
+- Cloudinary account
 
-### 1. Clone the Repository
+---
+
+### Installation
+
 ```bash
-git clone [https://github.com/your-username/eplq-secure.git](https://github.com/your-username/eplq-secure.git)
+git clone https://github.com/mahwish786/EPLQ-Project.git
 cd eplq-secure
+```
 
-2. Backend SetupNavigate to the backend folder and install dependencies:Bashcd backend
+---
+
+### Backend Setup
+
+```bash
+cd backend
 npm install
-Create a .env file in the backend directory:Code snippetPORT=5000
+npm run server
+```
+
+Backend runs on: `http://localhost:5000`
+
+---
+
+### Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend runs on: `http://localhost:3000`
+
+---
+
+## 🔐 Environment Variables
+
+### Backend (.env)
+
+```env
+PORT=5000
 MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_super_secret_key
+JWT_SECRET=your_secret_key
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
-Start the server:Bashnpm run server
-# Server will run on http://localhost:5000
+```
 
-3. Frontend SetupOpen a new terminal, navigate to the frontend folder, and install dependencies:Bashcd frontend
-npm install
-Create a .env.local file in the frontend directory:Code snippetNEXT_PUBLIC_API_URL=http://localhost:5000/api
-Start the Next.js app:Bashnpm run dev
-# App will run on http://localhost:3000
-📂 Project StructureThis project follows a Monorepo style structure:eplq-secure/
-├── backend/                 # Node.js & Express Server
-│   ├── config/              # DB & Cloudinary Config
-│   ├── controllers/         # Logic for Auth, Places, Admin
-│   ├── models/              # Mongoose Schemas
-│   ├── routes/              # API Endpoints
-│   └── server.js            # Entry Point
+### Frontend (.env.local)
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+```
+
+---
+
+## 📂 Project Structure
+
+```bash
+eplq-secure/
+├── backend/
+│   ├── config/          # DB & Cloudinary config
+│   ├── controllers/     # Auth, Places, Admin logic
+│   ├── models/          # Mongoose schemas
+│   ├── routes/          # API routes
+│   └── server.js        # Entry point
 │
-└── frontend/                # Next.js Application
-    ├── src/app/             # Pages & Routes (Login, Dashboard, etc.)
-    ├── src/components/      # Reusable UI (Navbar, Maps, Modals)
-    └── src/services/        # Axios API Configuration
+└── frontend/
+    ├── src/app/         # Pages & routing
+    ├── src/components/  # UI components
+    └── src/services/    # Axios API config
+```
 
-🔗 API DocumentationMethodEndpointDescriptionAccessGET/api/placesGet all secure locationsPublicPOST/api/placesAdd a new locationAdminPUT/api/places/:idUpdate location detailsAdminDELETE/api/places/:idRemove a locationAdminPOST/api/auth/registerRegister new userPublicPOST/api/admin/loginAdmin Dashboard AccessPublic🤝 ContributingContributions are welcome! Please feel free to submit a Pull Request.Fork the projectCreate your Feature Branch (git checkout -b feature/AmazingFeature)Commit your Changes (git commit -m 'Add some AmazingFeature')Push to the Branch (git push origin feature/AmazingFeature)Open a Pull Request📜 LicenseDistributed under the MIT License. See LICENSE for more information.<p align="center">Built by Mahwish Ahmed</p>
+---
+
+## 🔗 API Documentation
+
+| Method | Endpoint | Description | Access |
+|------|--------|------------|--------|
+| GET | /api/places | Get all locations | Public |
+| POST | /api/places | Add new location | Admin |
+| PUT | /api/places/:id | Update location | Admin |
+| DELETE | /api/places/:id | Delete location | Admin |
+| POST | /api/auth/register | Register user | Public |
+| POST | /api/admin/login | Admin login | Public |
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to GitHub
+5. Open a Pull Request
+
+---
+
+## 📜 License
+
+Distributed under the **MIT License**.
+
+---
+
+<p align="center">Built by <strong>Mahwish Ahmed</strong></p>
