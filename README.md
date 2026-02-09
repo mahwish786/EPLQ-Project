@@ -84,7 +84,7 @@ The project was created as part of an internship and is **not intended to be a p
 ### Clone the Repository
 ```bash
 git clone https://github.com/mahwish786/EPLQ-Project.git
-cd eplq-secure
+cd EPLQ-Project
 ```
 
 ---
