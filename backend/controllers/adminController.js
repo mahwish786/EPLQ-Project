@@ -66,9 +66,8 @@ export const loginAdmin = async (req, res) => {
 };
 
 export const logoutAdmin = async (req, res) => {
-  res.cookie('admin_token', 'none', {
+  res.clearCookie('admin_token', {
     httpOnly: true,
-    expires: new Date(0),
     secure: process.env.NODE_ENV === 'production',
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
   });
