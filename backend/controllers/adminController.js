@@ -14,7 +14,6 @@ const sendAdminToken = (admin, statusCode, res) => {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    path: '/'
   };
 
   res.status(statusCode).cookie('admin_token', token, options).json({
