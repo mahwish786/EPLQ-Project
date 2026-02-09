@@ -1,22 +1,28 @@
-import dotenv from 'dotenv';
 import express from 'express';
-import cors from 'cors';
+const app = express();
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 import placeRoutes from './routes/placeRoute.js';
 import authRoutes from './routes/authRoute.js';
 import adminRoutes from './routes/adminRoute.js';
-
+import cors from 'cors';
+import dotenv from 'dotenv';
 dotenv.config();
+
+await connectDB();
+
 app.set('trust proxy', 1);
 
-const app = express();
-connectDB();
-
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000', 'https://eplq-green.vercel.app'], 
+  origin: [
+    'http://localhost:5173', 
+    'http://localhost:3000', 
+    'https://eplq-green.vercel.app',
+    "https://eplq-five.vercel.app"
+  ], 
   credentials: true,
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 
