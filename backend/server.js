@@ -12,8 +12,7 @@ await connectDB();
 app.use(cors({
   origin: [
     'http://localhost:5173', 
-    'http://localhost:3000', 
-    'https://eplq-secure.vercel.app',
+    'http://localhost:3000',
   ], 
   methods: ["POST", "GET", "PUT", "PATCH", "DELETE"],
   credentials: true,
