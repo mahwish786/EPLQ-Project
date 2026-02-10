@@ -1,6 +1,5 @@
 import express from 'express';
 const app = express();
-app.set('trust proxy', 1);
 import 'dotenv/config';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
