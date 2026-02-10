@@ -15,6 +15,7 @@ app.use(cors({
     'http://localhost:3000', 
     'https://eplq-secure.vercel.app',
   ], 
+  methods: ["POST", "GET", "PUT", "PATCH", "DELETE"],
   credentials: true,
 }));
 
