@@ -9,10 +9,8 @@ const sendAdminToken = (admin, statusCode, res) => {
 
   const options = {
     httpOnly: true,
-    secure: true,
-    sameSite: 'none',
-    // secure: process.env.NODE_ENV === 'production',
-    // sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
     maxAge: 30 * 24 * 60 * 60 * 1000,
   };
 
@@ -69,10 +67,8 @@ export const logoutAdmin = async (req, res) => {
   try {
     res.clearCookie('admin_token', {
     httpOnly: true,
-    secure: true,
-    sameSite: 'none',
-    // secure: process.env.NODE_ENV === 'production',
-    // sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
     });
     res.status(200).json({ success: true });
   }
